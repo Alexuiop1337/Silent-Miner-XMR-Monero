@@ -15,3 +15,13 @@
 - Невозможно убить процесс на Windows 7
 - Поддержка IPLogger
 - Поддерживает и x32 так и x64 ОС версии
+
+# Setup Guide (ENG)
+1) Setup your pool (ex. pool.minergate.com:1337)
+2) Setup your user name. If you're using minergate fill in your mail address. Other pools may require other information.
+3) To setup workers' name change PassWord variable.
+
+# Гайд по настройке (РУС)
+1) Впиши свой пул (пр. pool.minergate.com:1337)
+2) Установите имя юзера. Если вы используете minergate, то введите почту. Другие пулы могут требовать другую информацию
+3) Для установки имя воркеров поменяйте переменную PassWord
